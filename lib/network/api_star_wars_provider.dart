@@ -23,7 +23,7 @@ class ApiStarsWarsProvider {
 
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Color.fromRGBO(236, 79, 79, 1),
           content: Text("Ocorreu um erro na busca.")));
       return Character(
           name: 'Erro',
