@@ -14,10 +14,10 @@ class UserGit{
 
   factory UserGit.fromJson(Map<String, dynamic> json){
     return UserGit(
-      login: json['login'],
-      name: json['name']?? "<Sem nome>",
-      bio: json['bio'],
-      avatar: json['avatar_url']
+      login: json['login'] ?? "",
+      name: json['name']?? "sem nome",
+      bio: json['bio'] ?? "sem biografia",
+      avatar: json['avatar_url']?? "https://pngimg.com/uploads/github/github_PNG40.png",
     );
   }
 }

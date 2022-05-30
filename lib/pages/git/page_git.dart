@@ -21,13 +21,6 @@ class _GitPageState extends State<GitPage> {
   );
 
   @override
-  void dispose() {
-    _controllerUser.dispose();
-    super.dispose();
-  }
-
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -37,7 +30,7 @@ class _GitPageState extends State<GitPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 50),
           child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +39,7 @@ class _GitPageState extends State<GitPage> {
                 backgroundColor: Colors.transparent,
                 radius: 100,
                 backgroundImage: NetworkImage(dataUser.avatar)),
-                const SizedBox(height: 5),
+                const SizedBox(height: 20),
                 Text('Usuário: ${dataUser.login}'),
                 const SizedBox(height: 5),
                 Text('Nome: ${dataUser.name}'),
@@ -70,6 +63,7 @@ class _GitPageState extends State<GitPage> {
                     dataUser = await _searchUser(
                       _controllerUser.text, context);
                     setState((){});
+                    _controllerUser.text = "";
                   }, child: const Text('Buscar'))
             ],
           ),
