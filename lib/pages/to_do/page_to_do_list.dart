@@ -75,7 +75,7 @@ class _ToDoPageState extends State<ToDoPage> {
                     ),
                   );
                 })
-            )
+            ),
           ],
         ),
       ),

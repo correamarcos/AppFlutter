@@ -6,34 +6,20 @@ import '../models/character.dart';
 class ApiStarsWarsProvider {
   ApiStarsWarsProvider();
 
-  Future<Character> getCharacters(BuildContext context) async {
+  Future<List<Character>> getCharacters(BuildContext context) async {
 
     ScaffoldMessenger.of(context)
         .showSnackBar(const SnackBar(content: Text("Carregando...")));
 
-    final response = await http.get(Uri.parse('https://swapi.dev/api/people/1'));
+    final response = await http.get(Uri.parse('https://swapi.dev/api/people'));
 
     ScaffoldMessenger.of(context).clearSnackBars();
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> dados = json.decode(response.body);
-      final Character character = Character.fromJson(dados);
-
-      return character;
-
+      List<dynamic> listCharacters = json.decode(response.body);
+      return  listCharacters.map((json) => Character.fromJson(json)).toList();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          backgroundColor: Color.fromRGBO(236, 79, 79, 1),
-          content: Text("Ocorreu um erro na busca.")));
-      return Character(
-          name: 'Erro',
-          height: 'Erro',
-          mass: 'Erro',
-          hair_color: 'Erro',
-          skin_color: 'Erro',
-          eye_color: 'Erro',
-          birth_year: 'Erro',
-          gender: 'Erro');
+      throw Exception("Empty Api");
     }
   }
 }

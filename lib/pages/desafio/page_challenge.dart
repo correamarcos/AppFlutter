@@ -1,5 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:treinamento_app2/pages/desafio/page_challenge_details.dart';
+
+import '../../models/character.dart';
+import '../../network/api_star_wars_provider.dart';
 
 class ChallengePage extends StatefulWidget {
   const ChallengePage({Key? key}) : super(key: key);
@@ -9,6 +15,10 @@ class ChallengePage extends StatefulWidget {
 }
 
 class _ChallengePageState extends State<ChallengePage> {
+
+  final Function _getPersonagens = ApiStarsWarsProvider().getCharacters;
+  late Future<List<Character>> getChars = _getPersonagens();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,35 +33,50 @@ class _ChallengePageState extends State<ChallengePage> {
         child: Column(
           children: [
             Form(
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'Procurar',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            ),
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Container(
+                            height: 50,
+                            child: TextFormField(
+                              decoration:InputDecoration(
+                                hintText: 'Procurar',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                ),
+                              ),
                           ),
-                    ),
-                    Container(
-                      color: Color.fromRGBO(236, 79, 79, 1),
-                      margin: EdgeInsets.only(left: 20),
-                      child: IconButton(
-                          onPressed: (){},
-                          color: Colors.white,
-                          icon: Icon(Icons.search_rounded,))
-                    ),
-                  ],
-              )
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Color.fromRGBO(236, 79, 79, 1),
+                        ),
+                        margin: EdgeInsets.only(left: 10),
+                        child: IconButton(
+                                splashRadius: 50,
+                                onPressed: (){},
+                                color: Colors.white,
+                                icon: Icon(Icons.search_rounded,size: 30,)),
+                      ),
+                    ],
+                ),
+                )
             ),
-            ElevatedButton(onPressed: (){
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                    builder: (BuildContext context) => DetailsChallengePage()));
-            }, child: Text('Teste API'))
+            Expanded(
+                child: ListView.builder(
+                  itemCount: 100,
+                  itemBuilder: (context, index) {
+                    return Card(
+                        child: ListTile(
+                          title: Text(getChars.toString())),
+                    );}
+
+            )
+            )
           ],
         ),
       ),

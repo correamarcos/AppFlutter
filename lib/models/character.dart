@@ -22,14 +22,14 @@ class Character{
 
   factory Character.fromJson(Map<String, dynamic> json){
     return Character(
-        name: json['name'],
-        height: json['height'],
-        mass: json['mass'],
-        hair_color: json['hair_color'],
-        skin_color: json['skin_color'],
-        eye_color: json['eye_color'],
-        birth_year: json['birth_year'],
-        gender: json['gender'],
+        name: json['name']?? "without information",
+        height: json['height']?? "without information",
+        mass: json['mass']?? "without information",
+        hair_color: json['hair_color']?? "without information",
+        skin_color: json['skin_color']?? "without information",
+        eye_color: json['eye_color']?? "without information",
+        birth_year: json['birth_year']?? "without information",
+        gender: json['gender']?? "without information",
     );
   }
 }

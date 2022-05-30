@@ -1,24 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../models/character.dart';
-
-class DetailsChallengePage extends StatefulWidget {
-  const DetailsChallengePage({Key? key}) : super(key: key);
-
-  @override
-  State<DetailsChallengePage> createState() => _DetailsChallengePageState();
-}
-
-class _DetailsChallengePageState extends State<DetailsChallengePage> {
-  Character character = Character(
-      name: "",
-      height: "",
-      mass: "",
-      hair_color: "",
-      skin_color: "",
-      eye_color: "",
-      birth_year: "",
-      gender: "");
+class DetailsChallengePage extends StatelessWidget {
+  Map<String, dynamic> personagem;
+  DetailsChallengePage({Key? key, required this.personagem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +10,7 @@ class _DetailsChallengePageState extends State<DetailsChallengePage> {
       appBar: AppBar(
         backgroundColor:  const Color.fromRGBO(236, 79, 79, 1),
         centerTitle: true,
-        title: const Text("Detalhes"),
+        title: Text(personagem['name']),
       ),
       body: Center(
         child: Column(
@@ -34,21 +18,21 @@ class _DetailsChallengePageState extends State<DetailsChallengePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 5),
-            Text('Nome: ${character.name}'),
+            Text('Nome: ' + personagem['name']),
             const SizedBox(height: 5),
-            Text('Altura: ${character.height}'),
+            Text('Altura: ' + personagem['name']),
             const SizedBox(height: 5),
-            Text('Peso: ${character.mass}'),
+            Text('Peso: ' + personagem['name']),
             const SizedBox(height: 5),
-            Text('Cor do cabelo: ${character.hair_color}'),
+            Text('Cor do cabelo: ' + personagem['name']),
             const SizedBox(height: 5),
-            Text('Cor da pele: ${character.skin_color}'),
+            Text('Cor da pele: ' + personagem['name']),
             const SizedBox(height: 5),
-            Text('Cor dos olhos: ${character.eye_color}'),
+            Text('Cor dos olhos: ' + personagem['name']),
             const SizedBox(height: 5),
-            Text('Aniversario: ${character.birth_year}'),
+            Text('Aniversario: ' + personagem['name']),
             const SizedBox(height: 5),
-            Text('Genero: ${character.gender}')
+            Text('Genero: ' + personagem['name'])
           ],
         ),
       ),
