@@ -10,13 +10,17 @@ class ToDoPage extends StatefulWidget {
 class _ToDoPageState extends State<ToDoPage> {
   final TextEditingController _controllerTask = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final Color color_geen = Colors.green;
+  final Color color_red = Colors.red;
+  bool statusBotao = false;
+
   List<String> _task = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  const Color.fromRGBO(236, 79, 79, 1),
+        backgroundColor:  const Color.fromRGBO(193, 28, 59, 1),
         centerTitle: true,
         title: const Text("To Do List Page"),
       ),
@@ -50,7 +54,7 @@ class _ToDoPageState extends State<ToDoPage> {
                   Container(
                     margin: const EdgeInsets.only(left: 10),
                     child: FloatingActionButton(
-                      backgroundColor: const Color.fromRGBO(236, 79, 79, 1),
+                      backgroundColor: const Color.fromRGBO(193, 28, 59, 1),
                       child: const Icon(Icons.add),
                       onPressed: (){
                         if(_formKey.currentState!.validate()){
@@ -66,15 +70,31 @@ class _ToDoPageState extends State<ToDoPage> {
               )
             ),
             Expanded(child:
-                ListView.builder(
-                  itemCount: _task.length,
-                  itemBuilder: (context, index){
-                  return Card(
-                    child: ListTile(
-                      title: Text(_task[index]),
-                    ),
-                  );
-                })
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: ListView.builder(
+                    itemCount: _task.length,
+                    itemBuilder: (context, index){
+                    return Card(
+                      child: Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: ListTile(
+                                  title: Text(_task[index]),
+                                ),
+                            ),
+                            IconButton(onPressed: (){}, icon: Icon(Icons.check_circle), ),
+                            IconButton(onPressed: (){
+                                _task.remove(_task[index]);
+                                setState((){});
+                            }, icon: Icon(Icons.delete, color: Color.fromRGBO(193, 28, 59, 1),))
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+                )
             ),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:treinamento_app2/pages/desafio/loading_list_personagens.dart';
 import 'package:treinamento_app2/pages/desafio/page_challenge.dart';
 import 'package:treinamento_app2/pages/git/page_git.dart';
 
@@ -11,7 +12,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor:  const Color.fromRGBO(236, 79, 79, 1),
+          backgroundColor:  const Color.fromRGBO(193, 28, 59, 1),
           centerTitle: true,
           title: const Text("Home Page"),
         ),
@@ -23,7 +24,7 @@ class MainPage extends StatelessWidget {
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(100, 40),
-                  primary: const Color.fromRGBO(236, 79, 79, 1),
+                  primary: const Color.fromRGBO(193, 28, 59, 1),
                 ),
                 onPressed: (){
                   Navigator.push(
@@ -51,7 +52,7 @@ class MainPage extends StatelessWidget {
                 onPressed: (){
                     Navigator.push(
                         context, MaterialPageRoute(
-                        builder: (BuildContext context) => const ChallengePage()));
+                        builder: (BuildContext context) => LoadingListPersonagens()));
                 }, child: const Text("Desafio +")),
           ],
         ),
