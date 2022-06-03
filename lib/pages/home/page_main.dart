@@ -30,7 +30,7 @@ class MainPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (BuildContext context) => const ToDoPage()));
+                        builder: (BuildContext context) => ToDoPage()));
                 },
                 child: const Text("To do List")),
             ElevatedButton(

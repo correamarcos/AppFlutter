@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:treinamento_app2/models/task.dart';
 
 class ToDoPage extends StatefulWidget {
   const ToDoPage({Key? key}) : super(key: key);
@@ -10,11 +11,8 @@ class ToDoPage extends StatefulWidget {
 class _ToDoPageState extends State<ToDoPage> {
   final TextEditingController _controllerTask = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final Color color_geen = Colors.green;
-  final Color color_red = Colors.red;
-  bool statusBotao = false;
 
-  List<String> _task = [];
+  List<Task> _task = [];
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +56,9 @@ class _ToDoPageState extends State<ToDoPage> {
                       child: const Icon(Icons.add),
                       onPressed: (){
                         if(_formKey.currentState!.validate()){
+                          Task tarefa = Task(name: _controllerTask.text, status: false);
                             setState((){
-                              _task.add(_controllerTask.text);
+                              _task.add(tarefa);
                             });
                           _controllerTask.clear();
                         }
@@ -81,10 +80,20 @@ class _ToDoPageState extends State<ToDoPage> {
                           children: [
                             Expanded(
                                 child: ListTile(
-                                  title: Text(_task[index]),
+                                  title: Text("${_task[index].name}"),
                                 ),
                             ),
-                            IconButton(onPressed: (){}, icon: Icon(Icons.check_circle), ),
+                            IconButton(
+                              color: _task[index].status ? Colors.green : Color.fromRGBO(193, 28, 59, 1),
+                              onPressed: (){
+                                if(_task[index].status == true){
+                                  _task[index].status = false;
+                                }else{
+                                  _task[index].status = true;
+                                }
+                                setState((){});
+                              }, icon: Icon(Icons.check_circle),
+                            ),
                             IconButton(onPressed: (){
                                 _task.remove(_task[index]);
                                 setState((){});
