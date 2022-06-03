@@ -10,8 +10,6 @@ class ToDoPage extends StatefulWidget {
 
 class _ToDoPageState extends State<ToDoPage> {
   final TextEditingController _controllerTask = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   List<Task> _task = [];
 
   @override
@@ -27,47 +25,41 @@ class _ToDoPageState extends State<ToDoPage> {
         margin: EdgeInsets.only(top: 20),
         child: Column(
           children: [
-            Form(
-              key: _formKey,
-                child:Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _controllerTask,
-                        decoration: InputDecoration(
-                          labelText: 'Adicionar',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          ),
-                        keyboardType: TextInputType.text,
-                                      validator: (value){
-                                          if(value!.trim().isEmpty){
-                                            return '';
-                                          }
-                                          return null;
-                                      },
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+
+                            child: TextFormField(
+                              controller: _controllerTask,
+                              decoration: InputDecoration(
+                                labelText: 'Adicionar',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                ),
+                              keyboardType: TextInputType.text,
+                              ),
+
                         ),
+                      ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 5, bottom: 18),
+                      child: IconButton(onPressed: (){
+
+                          if(_controllerTask.text.trim().isNotEmpty) {
+                              Task tarefa = Task(
+                                  name: _controllerTask.text, status: false);
+                              setState(() {
+                                _task.add(tarefa);
+                              });
+                              _controllerTask.clear();
+                          }
+
+                        }, icon: Icon(Icons.add_circle_sharp, color: Color.fromRGBO(193, 28, 59, 1), size: 50,))
                     ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 10),
-                    child: FloatingActionButton(
-                      backgroundColor: const Color.fromRGBO(193, 28, 59, 1),
-                      child: const Icon(Icons.add),
-                      onPressed: (){
-                        if(_formKey.currentState!.validate()){
-                          Task tarefa = Task(name: _controllerTask.text, status: false);
-                            setState((){
-                              _task.add(tarefa);
-                            });
-                          _controllerTask.clear();
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              )
-            ),
+                  ],
+                ),
             Expanded(child:
                 Container(
                   margin: EdgeInsets.only(top: 20),
